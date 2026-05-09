@@ -1,0 +1,211 @@
+/* Variables & Reset */
+:root {
+
+    --bg-panel: rgba(13, 19, 33, 0.9);
+    --neon-blue: #00d2ff;
+    --neon-green: #00ff9d;
+    --text-main: #e0e6ed;
+    --text-muted: #8b9bb4;
+    --border: #1e293b;
+    --header-footer: #061024;
+}
+
+* { box-sizing: border-box; }
+
+/* Sticky Footer & Layout Fix */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Watermark */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #05080f; /* Fallback color */
+    color: #e0e6ed;
+    position: relative;
+    min-height: 100vh;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('../img/background-watermark.jpg') no-repeat center center/cover;
+    opacity: 0.1; /* Subtle watermark effect */
+    z-index: -1;
+}
+
+/* Header & Footer */
+header, footer {
+    background-color: var(--header-footer);
+    padding: 2.5rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+footer {
+    border-bottom: none;
+    border-top: 1px solid var(--border);
+    margin-top: auto; /* Pushes footer to bottom */
+}
+
+.brand-section h1 {
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    letter-spacing: 5px;
+    font-weight: 700;
+}
+
+.brand-section h1 span { color: var(--neon-blue); }
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+nav a:hover { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+
+/* Main Content Spacing */
+main {
+    flex: 1;
+    width: 90%;
+    max-width: 1300px;
+    margin: 60px auto;
+}
+
+h2 { color: var(--neon-blue); font-size: 2.2rem; margin-bottom: 1.5rem; }
+
+/*Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.service-card {
+    background: var(--bg-panel);
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    transition: 0.4s;
+    text-align: center;
+}
+
+.service-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    border-color: var(--neon-blue);
+    box-shadow: 0 15px 40px rgba(0, 210, 255, 0.15);
+}
+
+/*Gallery */
+.gallery-container {
+    width: 100%;
+    overflow: hidden; /* Hides the scrollbar */
+    background: rgba(0, 0, 0, 0.4);
+    padding: 60px 0;
+    margin: 40px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.gallery-track {
+    display: flex;
+    width: max-content; /* Vital: Allows track to be as wide as all images combined */
+    animation: scroll 40s linear infinite;
+}
+
+/*Stop animation when hovering over the container */
+.gallery-container:hover .gallery-track {
+    animation-play-state: paused;
+}
+
+.gallery-item {
+    /* 2. Fix 'Cutting in half' - Prevent shrinking and set explicit dimensions */
+    flex-shrink: 0; 
+    width: 600px; 
+    height: 400px;
+    margin: 0 20px;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+/*Highlight and Enlarge on Hover */
+.gallery-item:hover {
+    transform: scale(1.1); /* Enlarges the image */
+    border-color: var(--neon-green);
+    box-shadow: 0 0 30px rgba(0, 255, 157, 0.5); /* Neon Glow */
+    z-index: 10;
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* JS duplicates content, so we move exactly half-way */
+}
+
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* Contact Form Styling */
+fieldset { border: 1px solid var(--border); padding: 30px; border-radius: 12px; background: var(--bg-panel); }
+legend { padding: 0 15px; color: var(--neon-green); font-weight: bold; }
+.form-group { margin-bottom: 20px; text-align: left; }
+label { display: block; margin-bottom: 8px; color: var(--text-muted); }
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    background: #05080f;
+    border: 1px solid var(--border);
+    color: white;
+    border-radius: 5px;
+}
+button {
+    background: var(--neon-blue);
+    color: #000;
+    border: none;
+    padding: 15px 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover { background: var(--neon-green); box-shadow: 0 0 20px var(--neon-green); }
+
+/* FAQ Dropdown */
+.faq-item { border-bottom: 1px solid var(--border); background: var(--bg-panel); margin-bottom: 10px; }
+.faq-question { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; }
+.faq-answer { max-height: 0; overflow: hidden; transition: 0.4s ease-out; padding: 0 25px; color: var(--text-muted); }
+.faq-item.active .faq-answer { max-height: 300px; padding-bottom: 25px; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; background: var(--bg-panel); margin: 30px 0; }
+th, td { border: 1px solid var(--border); padding: 15px; text-align: center; }
+th { background: #111; color: var(--neon-blue); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .brand-section h1 { font-size: 2rem; }
+    nav ul { gap: 10px; }
+}
